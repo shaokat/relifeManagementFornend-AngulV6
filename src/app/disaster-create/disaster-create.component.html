@@ -1,0 +1,57 @@
+<div class="container" style="padding-top: 2em">
+  <div class="row justify-content-center">
+    <div class="col-md-5 ">
+      <div class="card border-success" style="border-width: 0.15em">
+        <h5 class="card-header bg-light text-black">Disaster Record</h5>
+        <div class="card-body">
+
+          <form #f="ngForm" (ngSubmit)="createDisaster(f)">
+            <div class="form-group">
+              <label for="disasterName">Name</label>
+              <input [(ngModel)]="distasterName" name="disastername" type="text" class="form-control">
+            </div>
+            <label for="disasterType">Type</label>
+
+            <select [(ngModel)]="selectedType" name="selectedtype" class="form-control">
+              <option *ngFor="let type of disasterType" [value]="type">{{type}}</option>
+            </select>
+
+            <div class="form-group">
+              <label for="dateOfOccurance">
+                Date Of Occurance
+              </label>
+              <input type="date" name="dateOfOccurance" class="form-control" [(ngModel)]="dateOfOccurance">
+            </div>
+            <div class="form-group"><label for="description">description</label>
+              <textarea [(ngModel)]="description" name="description" id="" class="form-control" cols="30" rows="10"></textarea>
+            </div>
+            <button class="btn btn-primary" data-toggle="modal" data-target=#myModal>Submit</button>
+            <!-- <p>{{f.value | json}}</p> 
+             {{responseStatus.status}}
+            -->
+            {{display}}
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf = "display" id="myModal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

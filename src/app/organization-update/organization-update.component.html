@@ -1,0 +1,29 @@
+<div class="card" style="width: 45rem;">
+  <h5 class="card-header bg-light text-black">Disaster Record</h5>
+  <div class="card-body">
+
+    <form #f="ngForm" (ngSubmit)="updateOrg(f)">
+        <div class="form-group">
+            <label for="orgName">Name</label>
+            <input [(ngModel)]="orgName" name="orgname"  type="text" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="orgAcm">Acronym</label>
+            <input [(ngModel)]="orgAcm" name="orgacm"  type="text" class="form-control">
+          </div>
+        <label for="orgType">Type</label>
+
+        <select [(ngModel)]="selectedType" name="selectedtype" class="form-control">
+          <option *ngFor="let type of orgType" [value]="type">{{type}}</option>
+        </select>
+
+
+          <div class="form-group"><label for="description">description</label>
+           <textarea [(ngModel)]="description" name="description" id="" class="form-control" cols="30" rows="10"></textarea>
+          </div>
+      <button class="btn btn-primary">Submit</button>
+      <p>{{f.value | json}}</p>
+      </form>
+  </div>
+</div>
+

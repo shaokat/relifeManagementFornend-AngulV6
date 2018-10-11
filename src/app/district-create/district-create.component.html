@@ -1,0 +1,36 @@
+<div class="container" style="padding-top: 5em">
+  <div class="row justify-content-center">
+    <div class="col-md-4">
+      <div class="card border-success" style="border-width: 0.15em">
+       
+          <h5 class="card-header bg-light text-black">Create District</h5>
+          <div class="card-body">
+
+            <form #district="ngForm" (ngSubmit)="crateDistrict(district)">
+              <div class="form-group">
+                <label for="dvision">Division</label>
+                <select ngModel name="divisionName" required #divisionName="ngModel" class="form-control">
+                  <option *ngFor="let division of divisions" [value]="division.id">{{division.name}}</option>
+                </select>
+                <div class="alert alert-danger" *ngIf="divisionName.touched && !divisionName.valid">
+                  <div *ngIf="districtName.errors.required">District Name Required</div>
+
+                </div>
+                <label for="districtName">District Name</label>
+                <input ngModel name="districtName" required minlength="3" #districtName="ngModel" type="text" class="form-control">
+
+                <div class="alert alert-danger" *ngIf="districtName.touched && !districtName.valid">
+                  <div *ngIf="districtName.errors.required">District Name Required</div>
+                  <div *ngIf="districtName.errors.minlength">
+                    District name should be minimum {{districtName.errors.minlength.requiredLength}} characters
+                  </div>
+                </div>
+              </div>
+              <button class="btn btn-primary" [disabled]="!district.valid">Submit</button>
+            </form>
+            {{district.value.divisionName}}
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

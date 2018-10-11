@@ -1,0 +1,37 @@
+<div class="container" style="padding-top: 5em">
+  <div class="row justify-content-center">
+    <div class="col-md-4 ">
+      <div class="card border-success" style="border-width: 0.15em">
+          <h5 class="card-header bg-light text-black">Create Union</h5>
+          <div class="card-body">
+
+            <form #f="ngForm" (ngSubmit)="createUnion(f)">
+              <label for="dvision">Division</label>
+              <select #selectedDivision [ngModel]="selectedDivision" (ngModelChange)="getDistricts($event)" name="division"
+                class="form-control">
+                <option *ngFor="let division of divisions" [value]="division.id">{{division.name}}</option>
+              </select>
+              <label for="district">District</label>
+              <select #selectedDistrict [ngModel]="selectedDistrict" (ngModelChange)="getUpazillas($event)" name="district"
+                class="form-control">
+                <option *ngFor="let district of districts" [value]="district.id">
+                  {{district.name}}
+                </option>
+              </select>
+              <label for="upazillaName">Upazilla Name</label>
+              <select #selectedUpazilla [ngModel]="selectedUpazilla" name="upazilla" class="form-control">
+                <option *ngFor="let upazilla of upazillas" [value]="upazilla.id">
+                  {{upazilla.name}}
+                </option>
+              </select>
+              <div class="form-group">
+                <label for="unionName">Union Name</label>
+                <input ngModel name="unionName" #unionName="ngModel" type="text" class="form-control">
+              </div>
+              <button class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

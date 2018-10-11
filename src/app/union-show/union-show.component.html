@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-4"  style="padding-top: 2rem;">
+      <div class="card">
+        <h5 class="card-header bg-light text-black">Selections for Upazillas</h5>
+        <div class="card-body">
+      <label for="dvision">Divisions</label>
+      <select ngModel="selectedDivision" (ngModelChange)="getDistricts($event)" name="division" class="form-control">
+        <option *ngFor="let division of divisions"
+        [ngValue]="division.id">{{division.name}}</option>
+      </select>
+      <label for="district">Districts</label>
+      <select ngModel="selectedDistrict" (ngModelChange)="getUpazillas($event)" name="district" class="form-control">
+        <option *ngFor="let district of districts" [ngValue]="district.id">
+          {{district.name}}
+        </option>
+      </select>
+      <label for="upazilla">Upazilla</label>
+      <select ngModel="selectUpazilla" (ngModelChange)="getUnions($event)" 
+        name="upazillas" class="form-control">
+        <option *ngFor="let upazilla of upazillas" [ngValue]="upazilla.id">
+          {{upazilla.name}}
+        </option>
+      </select>
+      </div>
+      </div>
+      </div>
+      
+  </div>
+</div>
+<mat-form-field>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter By Name">
+</mat-form-field>
+  <!-- <div class="mat-elevation-z8"> -->
+ <table mat-table [dataSource]="dataSource" >
+
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> Union Id </th>
+     <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+   </ng-container>
+
+ 
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Union Name </th>
+     <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+   </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>

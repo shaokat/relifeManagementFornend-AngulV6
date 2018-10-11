@@ -1,0 +1,66 @@
+<div class="container" id="district-show">
+  <div class="row justify-content-center">
+    <div class="col-md-4" style="padding-top: 2rem;">
+      <div class="card">
+        <h5 class="card-header bg-light text-black">Districts</h5>
+        <div class="card-body">
+          <label for="dvision">Division</label>
+          <select ngModel="selectedDivision" (ngModelChange)="getDistricts($event)" name="division" class="form-control">
+            <option *ngFor="let division of divisions" [value]="division.id">{{division.name}}</option>
+          </select>
+          
+          <mat-form-field>
+            <mat-select placeholder="Select Division Name" (selectionChange) ="getDistricts($event.value)">
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="let division of divisions" [value]="division.id">{{division.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <!-- end of card -->
+    </div>
+    </div>
+    </div>
+    <!-- <div class="col-md-9" style="padding-top: 2rem;">
+      <table class="table table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">District Name</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let district of districts">
+            <td> {{ district.name }}</td>
+            <td><button (click)="deletePost(district)" class="btn btn-default btn-sm">Delete</button>
+              <button [routerLink]="['/district/update',district.id]" class="btn btn-default btn-sm">Update</button>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div> -->
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter By Name">
+    </mat-form-field>
+      <!-- <div class="mat-elevation-z8"> -->
+     <table mat-table [dataSource]="dataSource" >
+  
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> District Id </th>
+         <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+       </ng-container>
+    
+     
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> District Name </th>
+         <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+       </ng-container>
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  <!-- </div> -->
+  <!-- </div>
+</div> -->

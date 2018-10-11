@@ -1,0 +1,30 @@
+<div class="card" style="width: 45rem;">
+    <h5 class="card-header bg-light text-black">Disaster Record</h5>
+    <div class="card-body">
+
+      <form #f="ngForm" (ngSubmit)="updateDisaster(f)">
+          <div class="form-group">
+              <label for="disasterName">Name</label>
+              <input [(ngModel)]="disasterName" name="disastername"  type="text" class="form-control">
+            </div>
+          <label for="disasterType">Type</label>
+
+          <select [(ngModel)]="selectedType" name="selectedtype" class="form-control">
+            <option *ngFor="let type of disasterType" [value]="type">{{type}}</option>
+          </select>
+
+          <div class="form-group">
+            <label for="dateOfOccurance">
+              Date Of Occurance
+            </label>
+            <input type="date" name="dateOfOccurance" class="form-control" [ngModel]="dateOfOccurance | date:'yyyy-MM-dd'" (ngModelChange)="dateOfOccurance = $event">
+            </div>
+            <div class="form-group"><label for="description">description</label>
+             <textarea [(ngModel)]="description" name="description" id="" class="form-control" cols="30" rows="10"></textarea>
+            </div>
+        <button class="btn btn-primary">Submit</button>
+        <p>{{f.value | json}}</p>
+        </form>
+    </div>
+  </div>
+

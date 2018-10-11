@@ -1,0 +1,31 @@
+
+  <form class="form-signin" [formGroup]="form" (ngSubmit)="signup()">
+    <h2 class="form-signin-heading">Please sign up</h2>
+    <div class="form-group">
+      <label for="userName">User Name</label>
+      <input formControlName = "userName"
+      id="userName"  name="userName"  type="text"
+       class="form-control"> 
+       <div *ngIf="userName.pending" class="alert alert-info">checking for uniqueness...</div>
+       <div class="alert alert-danger"
+       *ngIf="userName.touched && userName.invalid">
+       <div *ngIf="userName.errors.required">User Name Required</div>
+       <div *ngIf="userName.errors.minlength">User name should be minimum {{userName.errors.minlength.requiredLength}} characters</div>
+       <div *ngIf="userName.errors.cannotContainSpace">Username cannot contain space</div>
+       <div *ngIf="userName.errors.shouldBeUnique">Username exists.pick another</div>
+     </div>
+     
+       <label for="password">Password</label>
+       <input formControlName="password"
+       id="password"  name="password"  type="password"
+       class="form-control">
+
+    
+    <div class="alert alert-danger"
+    *ngIf="password.touched && password.invalid">
+    <div *ngIf="password.errors.required">Password Required</div>
+    <div *ngIf="password.errors.minlength">Password should be minimum {{password.errors.minlength.requiredLength}} characters</div>  
+  </div>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="form.invalid" type="submit">Sign Up</button>
+  </form>

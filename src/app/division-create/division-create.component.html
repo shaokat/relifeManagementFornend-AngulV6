@@ -1,0 +1,28 @@
+<div class="container" style="padding-top: 5em">
+  <div class="row justify-content-center">
+    <div class="col-md-4 " >
+      <div class="card border-success" style="border-width: 0.15em">
+        <h5 class="card-header ">Create Division</h5>
+        <div class="card-body">
+      
+          <form #division="ngForm" (ngSubmit)="createDivison(divisionName)">
+            <div class="form-group">
+              <label for="divisionName">Division Name</label>
+              <input required minlength="3" 
+              id="divisionName" ngModel name="divisionName" #divisionName="ngModel" type="text"
+               class="form-control">
+            
+            <div class="alert alert-danger"
+              *ngIf="divisionName.touched && !divisionName.valid">
+              <div *ngIf="divisionName.errors.required">Division Name Required</div>
+              <div *ngIf="divisionName.errors.minlength">
+                Division name should be minimum {{divisionName.errors.minlength.requiredLength}} characters</div>
+            </div>
+            </div>
+            <button id="submit" class="btn btn-success" [disabled]="!division.valid">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

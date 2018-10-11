@@ -1,0 +1,18 @@
+<div class="card" style="width: 18rem;">
+  <h5 class="card-header bg-light text-black">Update District</h5>
+  <div class="card-body">
+
+    <form #f="ngForm" (ngSubmit)="updateDistrict()">
+      <select name="type" [(ngModel)]="selectedDivision" >
+        <option  *ngFor="let division of all_divison" [ngValue] = "division">
+            {{division.name}}
+        </option>
+    </select>
+    <div class="form-group">
+      <label for="districtName">District Name</label>
+      <input [(ngModel)] = "districtName" name="district_name" type="text" class="form-control">
+    </div>
+    <input type="submit" value="submit" />
+      </form>
+  </div>
+</div>

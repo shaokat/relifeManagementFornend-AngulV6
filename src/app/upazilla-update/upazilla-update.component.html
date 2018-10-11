@@ -1,0 +1,18 @@
+<div class="card" style="width: 18rem;">
+  <h5 class="card-header bg-light text-black">Upadate Upazilla</h5>
+  <div class="card-body">
+<form #f="ngForm" (ngSubmit)="updateDistrict()">
+    <label for="upazilla">District Name</label>
+<select name="type" [(ngModel)]="selectedDistrict" class="form-control" >
+  <option  *ngFor="let district of all_district" [ngValue] = "district">
+      {{district.name}}
+  </option>
+</select>
+<div class="form-group">
+  <label for="upazilla">Upazilla Name</label>
+  <input [(ngModel)] = "upazillaName" name="upazilla_name" type="text" class="form-control">
+</div>
+<button class="btn btn-primary">Update</button>
+  </form>
+  </div>
+</div>

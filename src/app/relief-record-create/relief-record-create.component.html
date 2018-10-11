@@ -1,0 +1,122 @@
+<div class="container">
+  <form #relief="ngForm"(ngSubmit)="createRelief()">
+ <div class="row">
+<div class="col-lg-6 portfolio-item">
+<div class="card h-100">
+  <h5 class="card-header bg-light text-black">Selections for Area</h5>
+  <div class="card-body">
+<label for="dvision">Divisions</label>
+<select [(ngModel)]="selectedDivision" (ngModelChange)="getDistricts($event)" name="division" class="form-control">
+  <option *ngFor="let division of divisions"
+  [ngValue]="division.id">{{division.name}}</option>
+</select>
+<label for="district">Districts</label>
+<select [(ngModel)]="selectedDistrict" (ngModelChange)="getUpazillas($event)" name="district" class="form-control">
+  <option *ngFor="let district of districts" [ngValue]="district.id">
+    {{district.name}}
+  </option>
+</select>
+<label for="upazilla">Upazilla</label>
+<select [(ngModel)]="selectedUpazilla" (ngModelChange)="getUnions($event)" 
+  name="upazillas" class="form-control">
+  <option *ngFor="let upazilla of upazillas" [ngValue]="upazilla.id">
+    {{upazilla.name}}
+  </option>
+</select>
+<label for="union">Union</label>
+<select required [(ngModel)]="selectedUnion"
+  name="selectedUnion" class="form-control">
+  <option *ngFor="let union of unions" [ngValue]="union">
+    {{union.name}}
+  </option>
+</select>
+</div>
+</div>
+</div>
+
+<div class="col-lg-6 portfolio-item">
+  <div class="card h-100">
+  <h5 class="card-header bg-light text-black">Type of Relief</h5>
+  <div class="card-body">
+      <input required name="options"  [(ngModel)]="reliefType" type="radio" [value]="true" /> Money
+
+      <input required name="options"[(ngModel)]="reliefType" type="radio" [value]="false" /> Item
+     
+      
+      <div *ngIf="reliefType">
+          <label required for="Amount">Amount</label>
+          <input [(ngModel)]="amount" name="amount" required  type="text" 
+          placeholder="amount in taka" class="form-control">
+          
+        
+          <label for="ReceivedPepole">Recevied People</label>
+          
+            <input required [(ngModel)]="receivedPepole" name="receivedPepole" type="text" 
+            class="form-control" id="receivedPepole"
+            placeholder="number of people received" />
+      
+      </div>
+
+      <div *ngIf="!reliefType">
+        <label for="ItemName">Item Name</label>
+        <input  required [(ngModel)]="itemName" name="itemName" type="text" class="form-control" 
+             placeholder="Name of Item" />
+             
+        <label for="ReceivedPepole">Item Amount</label>
+          
+        <input  required [(ngModel)]="itemAmount" name="itemAmount" type="text" class="form-control" 
+             placeholder="Amount of Item" />
+        <label for="ReceivedPepole">Recevied People</label>
+          
+        <input required [(ngModel)]="receivedPepole" name="receivedPepole" type="text" 
+            class="form-control" id="receivedPepole"
+            placeholder="number of people received" />
+             
+      
+      </div>
+      <label for="Description">Description</label>
+          
+      <textarea [(ngModel)]="description" name="description" 
+           id="description" class="form-control" cols="30" rows="10">
+      </textarea>
+      <label for="dateOfDisttribution">
+          Date Of Distribution
+        </label>
+        <input required type="date" name="dateOfDisttribution" class="form-control"
+         [(ngModel)]="dateOfDisttribution">
+    </div>
+    </div>
+    </div>
+    
+    <div class="col-lg-6 portfolio-item">
+      <div class="card h-100">
+      <h5 class="card-header bg-light text-black">Organization Information</h5>
+      <div class="card-body">
+          
+          <label for="organization">Organization</label>
+          <select required [(ngModel)]="selectedOrganization" name="selectedOrganization" class="form-control">
+            <option *ngFor="let org of organizations" [ngValue]="org">
+              {{org.nameAcronym}} ({{org.name}})
+            </option>
+          </select>
+        </div>
+        </div>
+        </div>
+        <div class="col-lg-6 portfolio-item">
+            <div class="card h-100">
+            <h5 class="card-header bg-light text-black">Type of Disaster</h5>
+            <div class="card-body">
+                
+                <label for="disaster">Disasterr</label>
+                <select required [(ngModel)]="selectedDisaster" name="selectedDisaster" class="form-control">
+                  <option *ngFor="let dis of disasters" [ngValue]="dis">
+                    {{dis.name}}
+                  </option>
+                </select>
+              </div>
+              </div>
+              </div>
+       </div> 
+       <button class="btn btn-primary" [disabled]="!relief.valid" >Submit</button>
+      </form>
+</div>

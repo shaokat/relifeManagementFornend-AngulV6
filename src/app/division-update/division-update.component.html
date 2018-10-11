@@ -1,0 +1,14 @@
+
+<div class="card" style="width: 18rem;">
+  <h5 class="card-header bg-light text-black">Update Division</h5>
+  <div class="card-body">
+  
+    <form (ngSubmit)="upadateDivision(divisionName)">
+        <div class="form-group">
+        <label for="divisionName">Division Name</label>
+        <input NgModel name="divisionName" [value]="divisiond?.name"  #divisionName type="text" class="form-control">
+      </div>
+      <button class="btn btn-primary">Update</button>
+      </form>
+  </div>
+</div>

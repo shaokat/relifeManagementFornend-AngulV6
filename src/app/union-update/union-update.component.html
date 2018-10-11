@@ -1,0 +1,18 @@
+<div class="card" style="width: 18rem;">
+  <h5 class="card-header bg-light text-black">Update Union</h5>
+  <div class="card-body">
+    <form #f="ngForm" (ngSubmit)="updateUnion()">
+       <label for="upazillaName">Upazilla Name</label>
+        <select [(ngModel)]="selectedUpazilla" name="upazilla" class="form-control">
+          <option *ngFor="let upazilla of all_upazilla" [ngValue]="upazilla">
+            {{upazilla.name}}
+          </option>
+        </select>
+        <div class="form-group">
+          <label for="unionName">Union Name</label>
+          <input [(ngModel)]="unionName" name="union_name" type="text" class="form-control">
+        </div>
+        <button class="btn btn-primary">Update</button>
+    </form>
+    </div>
+  </div>

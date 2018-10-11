@@ -1,0 +1,152 @@
+<div class="container">
+  <div class="col-md-8">
+      <form #serchOpiton = "ngForm"class="form-inline" style="padding: 1rem">
+          <div  class="form-group" style="padding: .5rem">
+            <label for="reliefType"class="form-group mx-sm-3 mb-2 type">Relief Type</label>
+                <select class="form-control" [(ngModel)] = "reliefType" name="reliefType" (ngModelChange)="getByType()" >
+                  <option value="item">Item</option>
+                  <option value="money">Money</option>
+                </select>
+                  
+          </div>
+          <!-- <div class="form-group" style="padding: .5rem">
+              <label for="fDate" class="form-group mx-sm-3 mb-2 type">From Date</label>
+              <input class="form-control" required [(ngModel)]="fromDate" name="fromDate" type="date" >
+              <label for="toDate" class="form-group mx-sm-3 mb-2 type">To Date</label>
+              <input class="form-control"  [(ngModel)]="toDate" name="toDate" type="date" >
+           
+            <button 
+              (click)="getByDateRange()"
+              class="btn btn-primary   btn-sm"  [disabled]="fromDate.invalid">
+              Search
+          </button>
+          </div> -->
+          <div class="form-group" style="padding: .5rem">
+              <label for="disaster"  class="form-group mx-sm-3 mb-2 type">Disasterr</label>
+              <select class="form-control"  [(ngModel)]="selectedDisaster" name="selectedDisaster" (ngModelChange) = "getByDisaster()" >
+                  <option *ngFor="let dis of disasters" [ngValue]="dis.name">
+                      {{dis.name}}
+                  </option>
+                </select>
+              <label for="organization"  class="form-group mx-sm-3 mb-2 type">Organization</label>
+                <select class="form-control" required [(ngModel)]="selectedOrganization" name="selectedOrganization" 
+                (ngModelChange)="getByOrganization()" >
+                  <option *ngFor="let org of organizations" [ngValue]="org.nameAcronym">
+                    {{org.nameAcronym}}
+                  </option>
+                </select>
+              <button 
+                (click)="combineSearch()"
+                class="btn btn-primary btn-sm" [disabled]="!serchOpiton.valid">
+                Search By All
+            </button>
+          </div>
+                </form>
+  </div>
+
+          <!-- <div class="col-md-12 col-xs-12">
+              <table class="table">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th scope="col">Organization</th>
+                      <th scope="col">Place</th>
+                      <th scope="col">Date of Distribution</th>
+                      <th scope="col">Disaster Name</th>
+                      <th scope="col">Relief Type</th>
+                      <th *ngIf="reliefType === 'item'"  scope="col">Item Name</th>
+                      <th *ngIf="reliefType === 'item'" scope="col">Item Amount</th>
+                      <th *ngIf="reliefType === 'money'" scope="col">Amount in  Taka</th>
+                      <th scope="col">Number of People Received</th>
+                      
+                      <th scope="col">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      <tr  *ngFor="let element of elements">
+                          <td> {{ element.organization.name }}</td>
+                          <td>{{ element.place.name }}</td>
+                          <td>{{ element.timestamp['dayOfMonth']+
+                            ', '+element.timestamp['dayOfWeek'].toLowerCase()+
+                            ' - ' +element.timestamp['month'].toLowerCase()+
+                            ' - '+element.timestamp['year'] }}</td>
+                            <td>{{element.disaster.name}}</td>
+                            <td>{{element.type.type}}</td>
+                            <td *ngIf="reliefType === 'item'"  >{{element.type.name}}</td>
+                            <td *ngIf="reliefType === 'item'" >{{element.type.amountInUnit}}</td>
+                            <td *ngIf="reliefType === 'money'" >{{element.type.amountInTaka}}</td>
+                            <td >{{element.type.noOfPeopleHelped}}</td>
+                
+                          <td><button
+                            (click)="deleteelement(element)"
+                            class="btn btn-default btn-sm">Delete</button>
+                        
+                            <button
+                              [routerLink]="['/element/update',element.id]"
+                              class="btn btn-default btn-sm">Update</button>
+                            </td>
+                    </tr>
+                
+                  </tbody>
+                </table> 
+        </div>
+      -->
+
+</div>
+
+<mat-form-field>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter By Name">
+</mat-form-field>
+  <!-- <div class="mat-elevation-z8"> -->
+ <table mat-table [dataSource]="dataSource" >
+
+  <ng-container matColumnDef="Organization">
+    <th mat-header-cell *matHeaderCellDef> Organization </th>
+     <td mat-cell *matCellDef="let element"> {{element.organization.name }} </td>
+   </ng-container>
+
+ 
+  <ng-container matColumnDef="Place">
+    <th mat-header-cell *matHeaderCellDef> place </th>
+     <td mat-cell *matCellDef="let element"> {{element.place.name}} </td>
+   </ng-container>
+
+   <ng-container matColumnDef="Date of Distribution">
+    <th mat-header-cell *matHeaderCellDef> Date of Distribution </th>
+     <td mat-cell *matCellDef="let element"> {{ element.timestamp['dayOfMonth']+
+      ', '+element.timestamp['dayOfWeek'].toLowerCase()+
+      ' - ' +element.timestamp['month'].toLowerCase()+
+      ' - '+element.timestamp['year'] }}</td>
+   </ng-container>
+   <ng-container matColumnDef="Disaster Name">
+      <th mat-header-cell *matHeaderCellDef> Disaster name </th>
+       <td mat-cell *matCellDef="let element"> {{element.disaster.name}} </td>
+     </ng-container>
+    <ng-container matColumnDef="type">
+     <th mat-header-cell *matHeaderCellDef> Relief Type </th>
+      <td mat-cell *matCellDef="let element"> {{element.type.type}} </td>
+    </ng-container>
+          
+    <ng-container  *ngIf="reliefType === 'item'"  matColumnDef="item name">
+        <th mat-header-cell *matHeaderCellDef> Iem Name </th>
+         <td mat-cell *matCellDef="let element"> {{element.type.name}} </td>
+       </ng-container>
+
+       <ng-container  *ngIf="reliefType === 'item'"  matColumnDef="IAmount">
+          <th mat-header-cell *matHeaderCellDef> Item Amount </th>
+           <td mat-cell *matCellDef="let element"> {{element.type.amountInUnit}} </td>
+         </ng-container>
+         <ng-container  *ngIf="reliefType === 'money'"  matColumnDef="amount">
+          <th mat-header-cell *matHeaderCellDef> Amount in Taka </th>
+           <td mat-cell *matCellDef="let element"> {{element.type.amountInTaka}} </td>
+         
+          </ng-container>
+         <ng-container  matColumnDef="NoOFPeople">
+          <th mat-header-cell *matHeaderCellDef> Number of People Received </th>
+           <td mat-cell *matCellDef="let element"> {{element.type.noOfPeopleHelped}} </td>
+         </ng-container>
+
+         
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<mat-paginator [pageSizeOptions]="[2, 4, 6]" showFirstLastButtons></mat-paginator>

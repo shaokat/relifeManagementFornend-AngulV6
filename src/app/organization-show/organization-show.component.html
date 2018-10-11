@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="col-md-12 col-xs-12">
+        <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Level</th>
+                <th scope="col">Short Form(Acronym)</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr  *ngFor="let org of organizations">
+                    <td> {{ org.name }}</td>
+                    <td>{{ org.orgLevel }}</td>
+                    <td>{{ org.nameAcronym }}</td>
+                    <td><button
+                      (click)="deleteOrg(org.id)"
+                      class="btn btn-default btn-sm">Delete</button>
+                      <button
+                        [routerLink]="['/organization/update',org.id]"
+                        class="btn btn-default btn-sm">Update</button>
+                      </td>
+              </tr>
+          
+            </tbody>
+          </table>
+          
+          
+    </div>
+</div>
